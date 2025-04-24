@@ -17,9 +17,13 @@
 		"@sveltejs/vite-plugin-svelte": "^5.0.0",
 		"@tailwindcss/vite": "^4.0.0",
 		"svelte": "^5.0.0",
+		"svelte-adapter-bun": "^0.5.2",
 		"svelte-check": "^4.0.0",
 		"tailwindcss": "^4.0.0",
 		"typescript": "^5.0.0",
 		"vite": "^6.2.5"
+	},
+	"dependencies": {
+		"melt": "^0.29.3"
 	}
 }
