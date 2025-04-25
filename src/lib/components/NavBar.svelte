@@ -8,7 +8,7 @@
   ];
 </script>
 
-<nav class="bg-gray-100 dark:bg-gray-800 dark:text-white shadow-md py-4 fixed bottom-0 w-full z-10">
+<nav class="bg-gray-100 dark:bg-gray-800 dark:text-white shadow-md py-4 sticky bottom-0 w-full z-10">
   <ul class="flex justify-around">
     {#each navItems as item}
       <li>
