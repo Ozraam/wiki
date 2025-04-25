@@ -25,6 +25,7 @@
 	},
 	"dependencies": {
 		"@vite-pwa/sveltekit": "^1.0.0",
+		"iconify-icon": "^2.3.0",
 		"melt": "^0.29.3"
 	}
 }
