@@ -3,7 +3,9 @@
 
   let hide = $state(false);
   let lastScrollY = $state(0);
-  let threshold = 5; // Minimum scroll distance to trigger visibility change
+  let threshold = 50; // Minimum scroll distance to trigger visibility change
+
+  let colorChange = $state(false);
 
   onMount(() => {
     window.addEventListener("scroll", () => {
@@ -17,14 +19,22 @@
         }
         lastScrollY = currentScrollY;
       }
+
+      // change color based on scroll position
+      if (currentScrollY > 10) {
+        colorChange = true;
+      } else {
+        colorChange = false;
+      }
     });
   });
 </script>
 
 <header
-  class="bg-white sticky top-0 flex w-full items-center justify-center p-4 dark:bg-gray-800 dark:text-white transition-transform {hide
+  class=" sticky top-0 flex w-full items-center justify-center p-4 dark:bg-gray-800 dark:text-white transition-transform {hide
     ? '-translate-y-full'
-    : ''}"
+    : ''}
+    {colorChange ? 'bg-gray-100 text-black' : 'bg-white text-gray-800'} z-10"
 >
   <h1 class="font-bold text-2xl">FE Wiki</h1>
 </header>
