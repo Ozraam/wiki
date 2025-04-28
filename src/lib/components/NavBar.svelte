@@ -4,6 +4,7 @@
   const navItems = [
     { name: "Home", href: "/", icon: "mdi:home" },
     { name: "Search", href: "/search", icon: "oui:ws-search" },
+    { name: "Create", href: "/create", icon: "material-symbols:add" },
     { name: "Account", href: "/account", icon: "material-symbols:account-circle" },
   ];
 </script>

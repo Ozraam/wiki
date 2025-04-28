@@ -1,10 +1,10 @@
-import articles from '$lib/article/articleList.json';
+import ArticleDatabase from '$lib/repositorie/ArticleDatabase.js';
 
 export function load({ params }) {
     const { id } = params;
-
+    const article = ArticleDatabase.getArticle(parseInt(id));
     // Check if the article exists in the list
-    if (!articles.some((article) => article.id.toString() === id)) {
+    if (!article) {
         return {
             status: 404,
             error: new Error('Article not found'),
@@ -12,6 +12,6 @@ export function load({ params }) {
     }
 
     return {
-        article: articles.find((article) => article.id.toString() === id),
+        article: article,
     };
 }

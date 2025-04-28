@@ -1,11 +1,16 @@
 <script lang="ts">
     import "iconify-icon";
-    import articles from "$lib/article/articleList.json";
+    import ArticleDatabase from "$lib/repositorie/ArticleDatabase";
     import ArticleCard from "$lib/components/home/ArticleCard.svelte";
-    import { Select } from "melt/components";
     import { getTags } from "$lib/utils";
-
+    import { onMount } from "svelte";
+    import type { Article } from "$lib/type";
+    
+    let articles : Article[] = $state([]);
     let searchQuery = $state("");
+
+    
+
     let filteredArticles = $derived(
         articles.filter(
             (article) =>
@@ -18,7 +23,7 @@
         )
     );
     let tagPanelOpen = $state(false);
-    let tags: {tag: string, checked: boolean}[] = $state(getTags(articles).map((tag) => ({tag: tag, checked: true})));
+    let tags: {tag: string, checked: boolean}[] = $state([]);
 
     let selectedTags = $derived(tags.filter((tag) => tag.checked).map((tag) => tag.tag));
 
@@ -39,6 +44,11 @@
     function toogleTagPanel() {
         tagPanelOpen = !tagPanelOpen;    
     }
+
+    onMount(() => {
+        articles = ArticleDatabase.getAllArticles();
+        tags = getTags(articles).map((tag) => ({tag: tag, checked: true}))
+    })
 </script>
 
 <svelte:head>
