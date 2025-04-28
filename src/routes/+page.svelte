@@ -1,14 +1,13 @@
 <script lang="ts">
     import ArticleCard from "$lib/components/home/ArticleCard.svelte";
-    import ArticleDatabase from "$lib/repositorie/ArticleDatabase";
+    import {articlesDatabase} from "$lib/repositorie/ArticleDatabase.svelte";
     import type { Article } from "$lib/type";
     import { onMount } from "svelte";
 
-    let articles: Article[] = $state([]);
+    const { data } = $props();
 
-    onMount(() => {
-        articles = ArticleDatabase.getAllArticles();
-    });
+    let articles: Article[] = data.articles || [];
+
 </script>
 
 <svelte:head>

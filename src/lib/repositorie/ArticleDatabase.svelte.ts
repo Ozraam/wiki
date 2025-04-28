@@ -2,9 +2,9 @@ import type { Article } from "$lib/type";
 import articles_base from '$lib/article/articleList.json';
 
 class ArticleDatabase {
-    private articles: { [key: number]: Article } = {};
+    private articles: { [key: string]: Article } = {};
 
-    public addArticle(content: string, title: string, description: string, date: string, author:string, tags: string[]): void {
+    public addArticle(content: string, title: string, description: string, date: string, author:string, tags: string[]): number {
         const id = this.getNewId();
         this.articles[id] = {
             id: id,
@@ -16,6 +16,9 @@ class ArticleDatabase {
             tags
         };
         this.saveToDatabase();
+        console.log('Article added:', this.articles[id], id);
+        
+        return id;
     }
 
     public getNewId(): number {
@@ -27,7 +30,8 @@ class ArticleDatabase {
         if (Object.keys(this.articles).length === 0) {
             this.loadFromDatabase();
         }
-        return this.articles[id];
+        
+        return this.articles[id.toString()];
     }
     
     public deleteArticle(id: number): void {
@@ -43,11 +47,12 @@ class ArticleDatabase {
 
     private saveToDatabase(): void {
         // save this.articles to localstorage
-        localStorage.setItem('articles', JSON.stringify(this.articles));
+        // localStorage.setItem('articles', JSON.stringify(this.articles));
     }
 
     private loadFromDatabase(): void {
         // load this.articles from localstorage
+        console.log('Loading articles from localStorage...');
         
         const articles = isLocalStorageAvailable() ? localStorage.getItem('articles') : null;
         if (articles) {
@@ -71,4 +76,4 @@ function isLocalStorageAvailable() {
     }
 }
 
-export default new ArticleDatabase();
+export const articlesDatabase = $state(new ArticleDatabase());
