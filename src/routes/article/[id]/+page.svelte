@@ -35,4 +35,6 @@
   <meta name="date" content={article?.date} />
 </svelte:head>
 
-<SvelteMarkdown source={actualContent} />
+<div class="prose">
+    <SvelteMarkdown source={actualContent} />
+</div>
