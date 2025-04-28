@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { Article } from "$lib/type";
+  import TagsDisplay from "./TagsDisplay.svelte";
 
   const { article }: { article: Article } = $props();
 </script>
@@ -13,5 +14,6 @@
     <span class="text-gray-500">{article.author}</span> -
     <span class="text-gray-500">{new Date(article.date).toLocaleDateString()}</span>
   </small>
+  <TagsDisplay tags={article.tags} class="mt-2" />
   <p class="text-gray-600 text-ellipsis">{article.description}</p>
 </a>

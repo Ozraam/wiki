@@ -5,4 +5,5 @@ export type Article = {
     description: string;
     date: string;
     author: string;
+    tags: string[];
 };
