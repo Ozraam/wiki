@@ -6,6 +6,13 @@
     let isPreview = $state(false);
 </script>
 
+<svelte:head>
+    <title>Create Article</title>
+    <meta name="description" content="Create a new article." />
+    <meta name="author" content="FE Wiki" />
+    <meta name="date" content={new Date().toISOString()} />
+</svelte:head>
+
 <h2 class="text-2xl font-semibold mb-4">
     Create a new article
 </h2>
