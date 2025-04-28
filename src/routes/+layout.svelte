@@ -12,10 +12,12 @@
 	{@html webManifestLink}
 </svelte:head>
 
+<div class="flex flex-col min-h-screen">
+	<AppBar />
 
-<AppBar />
+	<div class="flex-1 p-4">
+		{@render children()}
+	</div>
 
-
-{@render children()}
-
-<NavBar />
+	<NavBar />
+</div>

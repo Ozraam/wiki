@@ -31,7 +31,7 @@
 </script>
 
 <header
-  class=" sticky top-0 flex w-full items-center justify-center p-4 dark:bg-gray-800 dark:text-white transition-transform {hide
+  class=" sticky top-0 flex w-full items-center justify-center p-4 dark:bg-gray-800 dark:text-white transition {hide
     ? '-translate-y-full'
     : ''}
     {colorChange ? 'bg-gray-100 text-black' : 'bg-white text-gray-800'} z-10"

@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "content": "machine.md",
+        "content": "/machine.md",
         "title": "Machine Learning",
         "description": "Machine learning is a subset of artificial intelligence that focuses on the development of algorithms and statistical models that enable computers to perform tasks without explicit instructions. It involves training models on data to make predictions or decisions.",
         "date": "2023-10-01",
@@ -9,7 +9,7 @@
     },
     {
         "id": 2,
-        "content": "deep_learning.md",
+        "content": "/deep_learning.md",
         "title": "Deep Learning",
         "description": "Deep learning is a subset of machine learning that uses neural networks with many layers (deep networks) to analyze various factors of data. It is particularly effective in image and speech recognition.",
         "date": "2023-10-02",
@@ -17,7 +17,7 @@
     },
     {
         "id": 3,
-        "content": "nlp.md",
+        "content": "/nlp.md",
         "title": "Natural Language Processing",
         "description": "Natural Language Processing (NLP) is a field of artificial intelligence that focuses on the interaction between computers and humans through natural language. It involves the development of algorithms that allow computers to understand, interpret, and generate human language.",
         "date": "2023-10-03",
@@ -25,7 +25,7 @@
     },
     {
         "id": 4,
-        "content": "computer_vision.md",
+        "content": "/computer_vision.md",
         "title": "Computer Vision",
         "description": "Computer vision is a field of artificial intelligence that enables computers to interpret and understand visual information from the world. It involves the development of algorithms that can process and analyze images and videos.",
         "date": "2023-10-04",
@@ -33,7 +33,7 @@
     },
     {
         "id": 5,
-        "content": "reinforcement_learning.md",
+        "content": "/reinforcement_learning.md",
         "title": "Reinforcement Learning",
         "description": "Reinforcement learning is a type of machine learning where an agent learns to make decisions by taking actions in an environment to maximize cumulative reward. It is often used in robotics, gaming, and autonomous systems.",
         "date": "2023-10-05",

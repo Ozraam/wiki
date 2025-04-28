@@ -1,0 +1,38 @@
+<script lang="ts">
+  import { goto } from "$app/navigation";
+  import { onMount } from "svelte";
+  import SvelteMarkdown from "svelte-markdown";
+
+  const { data } = $props();
+  const { article } = data;
+
+  let actualContent = $state("");
+  let error = $state(null);
+
+  onMount(async () => {
+    if (!article?.content) {
+      console.error("No content URL provided for the article.");
+      return;
+    }
+    try {
+      const response = await fetch(article.content);
+      if (!response.ok) {
+        goto("/article/404", { replaceState: true });
+        return;
+      }
+      const text = await response.text();
+      actualContent = text;
+    } catch (error) {
+      console.error("Error fetching article content:", error);
+    }
+  });
+</script>
+
+<svelte:head>
+  <title>{article?.title}</title>
+  <meta name="description" content={article?.description} />
+  <meta name="author" content={article?.author} />
+  <meta name="date" content={article?.date} />
+</svelte:head>
+
+<SvelteMarkdown source={actualContent} />
