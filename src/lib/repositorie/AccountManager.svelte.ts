@@ -2,6 +2,11 @@ import { JWT_TOKEN } from "$env/static/private";
 import { sign, verify } from "jsonwebtoken";
 
 class Account {
+    toJson(): string {
+        return JSON.stringify({
+            username: this.username,
+        });
+    }
     id: number;
     username: string;
     password: string;
@@ -14,6 +19,7 @@ class Account {
 }
 
 class AccountManager {
+    
     private static instance: AccountManager | null = null;
     private accounts: { [key: string]: Account } = {};
 
@@ -105,6 +111,16 @@ class AccountManager {
             console.error('Token verification failed:', error);
         }
         return false;
+    }
+
+    decodeToken(jwt: string) : { id: number; username: string } | undefined {
+        try {
+            const decoded = verify(jwt, JWT_TOKEN) as { id: number; username: string };
+            return decoded;
+        } catch (error) {
+            console.error('Token verification failed:', error);
+            return undefined;
+        }
     }
 
 }
