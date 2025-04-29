@@ -1,7 +1,15 @@
 import type { Article } from "$lib/type";
 import articles_base from '$lib/article/articleList.json';
 
-class ArticleDatabase {
+interface ArticleDatabaseInterface {
+    addArticle(content: string, title: string, description: string, date: string, author:string, tags: string[]): number;
+    getNewId(): number;
+    getArticle(id: number): Article | undefined;
+    deleteArticle(id: number): void;
+    getAllArticles(): Article[];
+}
+
+class ArticleDatabase implements ArticleDatabaseInterface {
     private articles: { [key: string]: Article } = {};
 
     public addArticle(content: string, title: string, description: string, date: string, author:string, tags: string[]): number {
@@ -76,4 +84,4 @@ function isLocalStorageAvailable() {
     }
 }
 
-export const articlesDatabase = $state(new ArticleDatabase());
+export const articlesDatabase : ArticleDatabaseInterface = $state(new ArticleDatabase());
