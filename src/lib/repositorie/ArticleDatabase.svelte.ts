@@ -7,6 +7,7 @@ interface ArticleDatabaseInterface {
     getArticle(id: number): Article | undefined;
     deleteArticle(id: number): void;
     getAllArticles(): Article[];
+    editArticle(id: number, content: string, title: string, description: string, date: string, author:string, tags: string[], accountId: number): void
 }
 
 class ArticleDatabase implements ArticleDatabaseInterface {
@@ -71,6 +72,21 @@ class ArticleDatabase implements ArticleDatabaseInterface {
             articles_base.forEach((article: Article) => {
                 this.articles[article.id] = article;
             });
+        }
+    }
+    
+    public editArticle(id: number, content: string, title: string, description: string, date: string, author:string, tags: string[], accountId: number): void {
+        if (this.articles[id]) {
+            this.articles[id].content = content;
+            this.articles[id].title = title;
+            this.articles[id].description = description;
+            this.articles[id].date = date;
+            this.articles[id].author = author;
+            this.articles[id].tags = tags;
+            this.articles[id].accountId = accountId;
+            this.saveToDatabase();
+        } else {
+            console.log('Article not found:', id);
         }
     }
 }

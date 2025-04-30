@@ -1,13 +1,15 @@
 <script lang="ts">
     import SvelteMarkdown from "svelte-markdown";
 
-    let content = $state("");
-
+    
     let isPreview = $state(false);
-
+    
     const {
         data
     } = $props();
+    
+    const article = data.is_edit && data.article ? data.article : null;
+    let content = $state(article?.content ?? "");
 </script>
 
 <svelte:head>
@@ -21,23 +23,23 @@
     Create a new article
 </h2>
 
-<form method="POST" action="/create" class="flex flex-col gap-4">
+<form method="POST" action="/create{data.is_edit ? "?edit=true&id="+data.article?.id : ""}" class="flex flex-col gap-4">
     <label for="title">Title</label>
-    <input type="text" id="title" name="title" required class="border p-2" />
+    <input type="text" id="title" name="title" required class="border p-2" value="{article?.title ?? ""}"/>
 
     <label for="description">Description</label>
-    <textarea id="description" name="description" required class="border p-2"></textarea>
+    <textarea id="description" name="description" required class="border p-2">{article?.description ?? ""}</textarea>
 
     <label for="author">Author</label>
-    <input type="text" id="author" name="author" required class="border p-2" value="{data.user ? data.user.username : ""}"/>
+    <input type="text" id="author" name="author" required class="border p-2" value="{data.user?.username ?? ""}"/>
 
     <label for="tags">Tags (comma separated)</label>
-    <input type="text" id="tags" name="tags" class="border p-2" />
+    <input type="text" id="tags" name="tags" class="border p-2" value="{article?.tags ?? ""}"/>
 
     <label for="content">Content</label>
     <textarea id="content" name="content" required class="border p-2" bind:value={content}></textarea>
 
-    <button type="submit" class="bg-blue-500 text-white p-2 active:bg-gray-200">Create Article</button>
+    <button type="submit" class="bg-blue-500 text-white p-2 active:bg-gray-200">{data.is_edit ? "Edit" : "Create"} Article</button>
     <button type="button" class="bg-blue-500 text-white p-2 active:bg-gray-200" onclick={() => isPreview = !isPreview}>Preview</button>
 
 </form>
