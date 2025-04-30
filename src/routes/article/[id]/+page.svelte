@@ -10,15 +10,14 @@
     let error = $state(null);
 
     onMount(async () => {
-        
         if (!article?.content) {
             console.log(article);
-            
+
             console.error("No content URL provided for the article.");
             return;
         }
         try {
-            if(!article.content.endsWith(".md")) {
+            if (!article.content.endsWith(".md")) {
                 actualContent = article.content;
                 return;
             }
@@ -42,27 +41,31 @@
     <meta name="date" content={article?.date} />
 </svelte:head>
 
-{#if data.user && data.user.id == data.article.accountId}
-<div class="w-full flex justify-end gap-2 items-center">
-    <a
-        href="/create?edit=true&id={data.article.id}"
-        class="transition duration-200 hover:underline cursor-pointer text-blue-500 text-sm visited:text-blue-600 active:text-blue-700"
-    >
-        Edit Article
-    </a>
+<div class="flex flex-col justify-center w-full items-center">
+    <div class="max-w-3xl w-full">
+        {#if data.user && data.user.id == data.article.accountId}
+            <div class="w-full flex justify-end gap-2 items-center">
+                <a
+                    href="/create?edit=true&id={data.article.id}"
+                    class="transition duration-200 hover:underline cursor-pointer text-blue-500 text-sm visited:text-blue-600 active:text-blue-700"
+                >
+                    Edit Article
+                </a>
 
-    <form method="POST" action="?/delete">
-        <input type="hidden" name="id" value={data.article.id} />
+                <form method="POST" action="?/delete">
+                    <input type="hidden" name="id" value={data.article.id} />
 
-        <button
-            class="transition duration-200 hover:underline cursor-pointer text-blue-500 text-sm visited:text-blue-600 active:text-blue-700"
-        >
-            Delete Article
-        </button>
-    </form>
-</div>
-{/if}
+                    <button
+                        class="transition duration-200 hover:underline cursor-pointer text-blue-500 text-sm visited:text-blue-600 active:text-blue-700"
+                    >
+                        Delete Article
+                    </button>
+                </form>
+            </div>
+        {/if}
 
-<div class="prose">
-    <SvelteMarkdown source={actualContent} />
+        <div class="prose max-w-none w-max">
+            <SvelteMarkdown source={actualContent} />
+        </div>
+    </div>
 </div>
