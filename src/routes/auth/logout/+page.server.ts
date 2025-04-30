@@ -1,0 +1,9 @@
+import { redirect } from '@sveltejs/kit';
+
+export async function load({ cookies }) {
+    // Clear the JWT cookie to log out the user
+    cookies.delete('jwt', { path: '/' });
+    
+    // Optionally, you can redirect the user to the login page or home page after logout
+    return redirect(302, '/');
+}

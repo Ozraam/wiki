@@ -6,4 +6,5 @@ export type Article = {
     date: string;
     author: string;
     tags: string[];
+    accountId: number;
 };

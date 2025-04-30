@@ -4,6 +4,10 @@
     let content = $state("");
 
     let isPreview = $state(false);
+
+    const {
+        data
+    } = $props();
 </script>
 
 <svelte:head>
@@ -25,7 +29,7 @@
     <textarea id="description" name="description" required class="border p-2"></textarea>
 
     <label for="author">Author</label>
-    <input type="text" id="author" name="author" required class="border p-2" />
+    <input type="text" id="author" name="author" required class="border p-2" value="{data.user ? data.user.username : ""}"/>
 
     <label for="tags">Tags (comma separated)</label>
     <input type="text" id="tags" name="tags" class="border p-2" />

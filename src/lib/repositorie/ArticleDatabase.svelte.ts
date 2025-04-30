@@ -2,7 +2,7 @@ import type { Article } from "$lib/type";
 import articles_base from '$lib/article/articleList.json';
 
 interface ArticleDatabaseInterface {
-    addArticle(content: string, title: string, description: string, date: string, author:string, tags: string[]): number;
+    addArticle(content: string, title: string, description: string, date: string, author:string, tags: string[], accountId: number): number;
     getNewId(): number;
     getArticle(id: number): Article | undefined;
     deleteArticle(id: number): void;
@@ -12,7 +12,7 @@ interface ArticleDatabaseInterface {
 class ArticleDatabase implements ArticleDatabaseInterface {
     private articles: { [key: string]: Article } = {};
 
-    public addArticle(content: string, title: string, description: string, date: string, author:string, tags: string[]): number {
+    public addArticle(content: string, title: string, description: string, date: string, author:string, tags: string[], accountId: number): number {
         const id = this.getNewId();
         this.articles[id] = {
             id: id,
@@ -21,7 +21,8 @@ class ArticleDatabase implements ArticleDatabaseInterface {
             description,
             date,
             author,
-            tags
+            tags,
+            accountId,
         };
         this.saveToDatabase();
         console.log('Article added:', this.articles[id], id);

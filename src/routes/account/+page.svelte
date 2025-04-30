@@ -2,9 +2,6 @@
     const { data } = $props();
 
     let account : { username: string} | null= $state(null);
-    if (data.account) {
-        account = JSON.parse(data.account);
-    }
 </script>
 
 <svelte:head>
@@ -18,9 +15,9 @@
 
 <p class="text-gray-500 mb-4">Manage your account settings and preferences.</p>
 
-{#if data.loggedIn}
+{#if data.user}
     <p class="text-green-500 mb-4">
-        Welcome back, {account?.username}! You are logged in.
+        Welcome back, {data.user.username}! You are logged in.
     </p>
 
     <div class="flex gap-4 w-full">

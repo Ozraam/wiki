@@ -116,7 +116,11 @@ class AccountManager {
     decodeToken(jwt: string) : { id: number; username: string } | undefined {
         try {
             const decoded = verify(jwt, JWT_TOKEN) as { id: number; username: string };
-            return decoded;
+            const account = this.getAccount(decoded.id);
+            if (account && account.username === decoded.username) {
+                return decoded;
+            }
+            return undefined;
         } catch (error) {
             console.error('Token verification failed:', error);
             return undefined;

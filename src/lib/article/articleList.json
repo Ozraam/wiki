@@ -6,7 +6,8 @@
         "description": "Machine learning is a subset of artificial intelligence that focuses on the development of algorithms and statistical models that enable computers to perform tasks without explicit instructions. It involves training models on data to make predictions or decisions.",
         "date": "2023-10-01",
         "author": "John Doe",
-        "tags": ["AI", "ML", "Data Science"]
+        "tags": ["AI", "ML", "Data Science"],
+        "accountId": -1
     },
     {
         "id": 2,
@@ -15,7 +16,8 @@
         "description": "Deep learning is a subset of machine learning that uses neural networks with many layers (deep networks) to analyze various factors of data. It is particularly effective in image and speech recognition.",
         "date": "2023-10-02",
         "author": "Jane Smith",
-        "tags": ["AI", "Deep Learning", "Neural Networks"]
+        "tags": ["AI", "Deep Learning", "Neural Networks"],
+        "accountId": -1
     },
     {
         "id": 3,
@@ -24,7 +26,8 @@
         "description": "Natural Language Processing (NLP) is a field of artificial intelligence that focuses on the interaction between computers and humans through natural language. It involves the development of algorithms that allow computers to understand, interpret, and generate human language.",
         "date": "2023-10-03",
         "author": "Alice Johnson",
-        "tags": ["AI", "NLP", "Text Analysis"]
+        "tags": ["AI", "NLP", "Text Analysis"],
+        "accountId": -1
     },
     {
         "id": 4,
@@ -33,7 +36,8 @@
         "description": "Computer vision is a field of artificial intelligence that enables computers to interpret and understand visual information from the world. It involves the development of algorithms that can process and analyze images and videos.",
         "date": "2023-10-04",
         "author": "Bob Brown",
-        "tags": ["AI", "Computer Vision", "Image Processing"]
+        "tags": ["AI", "Computer Vision", "Image Processing"],
+        "accountId": -1
     },
     {
         "id": 5,
@@ -42,6 +46,7 @@
         "description": "Reinforcement learning is a type of machine learning where an agent learns to make decisions by taking actions in an environment to maximize cumulative reward. It is often used in robotics, gaming, and autonomous systems.",
         "date": "2023-10-05",
         "author": "Charlie Davis",
-        "tags": ["AI", "Reinforcement Learning", "Decision Making"]
+        "tags": ["AI", "Reinforcement Learning", "Decision Making"],
+        "accountId": -1
     }
 ]
