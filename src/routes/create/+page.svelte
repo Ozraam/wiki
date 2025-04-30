@@ -44,7 +44,7 @@
 
 </form>
 
-<div class="prose h-full w-full fixed z-20 top-0 left-0 bg-white p-4 overflow-auto transition-transform duration-500 {isPreview ? 'translate-x-0' : 'translate-x-full'}">
+<div class="prose h-full w-screen fixed z-20 top-0 right-0 bg-white p-4 overflow-auto  shadow sm:rounded-l-4xl transition-all duration-500 {isPreview ? 'translate-x-0' : 'translate-x-full'}">
     <h3 class="text-lg font-bold mb-2 flex items-center gap-2">
         <button aria-label="Close preview" onclick={() => isPreview = false} class="flex items-center cursor-pointer">
             <iconify-icon icon="material-symbols:close-rounded" class="text-3xl"></iconify-icon>
