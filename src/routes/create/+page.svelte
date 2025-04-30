@@ -20,7 +20,7 @@
 </svelte:head>
 
 <h2 class="text-2xl font-semibold mb-4">
-    Create a new article
+    {data.is_edit ? "Edit the article" : "Create a new article"}
 </h2>
 
 <form method="POST" action="/create{data.is_edit ? "?edit=true&id="+data.article?.id : ""}" class="flex flex-col gap-4">
