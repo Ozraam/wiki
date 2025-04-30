@@ -12,7 +12,7 @@ export function load({ cookies, url }) {
     
 
     if (jwt) {
-        const decoded = accountManager.decodeToken(jwt);
+        const decoded = accountManager.decodeToken(jwt, cookies);
         if (is_edit && articleId) {
             const temp = articlesDatabase.getArticle(parseInt(articleId));
             if (temp && decoded && temp.accountId === decoded.id) {
@@ -41,7 +41,7 @@ export const actions = {
         const jwt = cookies.get('jwt');
         let accountId = -1;
         if (jwt) {
-            const decoded = accountManager.decodeToken(jwt);
+            const decoded = accountManager.decodeToken(jwt, cookies);
             if (decoded) {
                 accountId = decoded.id;
             }

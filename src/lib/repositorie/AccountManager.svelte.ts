@@ -1,4 +1,5 @@
-import { JWT_TOKEN } from "$env/static/private";
+import { JWT_REFRESH_TOKEN, JWT_TOKEN } from "$env/static/private";
+import type { Cookies } from "@sveltejs/kit";
 import { sign, verify } from "jsonwebtoken";
 
 class Account {
@@ -90,17 +91,29 @@ class AccountManager {
         return Object.values(this.accounts).find(account => account.username === username);
     }
 
-    public async signIn(username: string, password: string): Promise<string> {
+    public async signIn(username: string, password: string, cookies: Cookies, setRefreshToken: boolean): Promise<string> {
         const account = this.getAccountByUsername(username);
         if (account && await Bun.password.verify(password, account.password)) {
-            const jwt = sign({ id: account.id, username: account.username }, JWT_TOKEN, { expiresIn: '1h' });
+            const jwt = this.getJWTToken(account);
+            if (setRefreshToken) {
+                const refreshToken = this.getRefreshJWT(account);
+                // Set the refresh token in a cookie
+                cookies.set("refreshToken", refreshToken, { path: "/", httpOnly: true, secure: true, maxAge: 60 * 60 * 24 * 30 }); // 30 days expiration
+            }
+            // Set the JWT in a cookie
+            cookies.set("jwt", jwt, { path: "/", httpOnly: true, secure: true, maxAge: 60 * 60 }); // 1 hour expiration
             return jwt;
         } else {
             return '';
         }
     }
 
-    public checkToken(token: string): boolean {
+    private getJWTToken(account: Account): string {
+        const jwt = sign({ id: account.id, username: account.username }, JWT_TOKEN, { expiresIn: '1h' });
+        return jwt;
+    }
+
+    public checkToken(token: string, cookies: Cookies): boolean {
         try {
             const decoded = verify(token, JWT_TOKEN) as { id: number; username: string };
             const account = this.getAccount(decoded.id);
@@ -109,11 +122,22 @@ class AccountManager {
             }
         } catch (error) {
             console.error('Token verification failed:', error);
+            // Check if the token is expired and refresh it if possible
+            const refreshToken = cookies.get("refreshToken");
+            if (refreshToken) {
+                const newJwt = this.getSigninByRefreshToken(refreshToken, cookies);
+                if (newJwt) {
+                    return true; // Token refreshed successfully
+                }
+            }
+            console.error('Token is invalid or expired:', error);
+            cookies.delete("jwt", { path: "/" });
+            cookies.delete("refreshToken", { path: "/" });
         }
         return false;
     }
 
-    decodeToken(jwt: string) : { id: number; username: string } | undefined {
+    decodeToken(jwt: string, cookies: Cookies) : { id: number; username: string } | undefined {
         try {
             const decoded = verify(jwt, JWT_TOKEN) as { id: number; username: string };
             const account = this.getAccount(decoded.id);
@@ -123,8 +147,41 @@ class AccountManager {
             return undefined;
         } catch (error) {
             console.error('Token verification failed:', error);
+            // Check if the token is expired and refresh it if possible
+            const refreshToken = cookies.get("refreshToken");
+            if (refreshToken) {
+                const newJwt = this.getSigninByRefreshToken(refreshToken, cookies);
+                if (newJwt) {
+                    return this.decodeToken(newJwt, cookies); // Decode the new token
+                }
+            }
+            console.error('Token is invalid or expired:', error);
             return undefined;
         }
+    }
+
+    public getRefreshJWT(acc: Account): string {
+        const jwt = sign({ id: acc.id, username: acc.username }, JWT_REFRESH_TOKEN, { expiresIn: '30d' });
+        return jwt;
+    }
+
+    public getSigninByRefreshToken(token: string, cookies: Cookies): string | undefined {
+        try {
+            const decoded = verify(token, JWT_REFRESH_TOKEN) as { id: number; username: string };
+            const account = this.getAccount(decoded.id);
+            if (account && account.username === decoded.username) {
+                const jwt = this.getJWTToken(account);
+                // Set the JWT in a cookie
+                cookies.set("jwt", jwt, { path: "/", httpOnly: true, secure: true, maxAge: 60 * 60 }); // 1 hour expiration
+                // Set the refresh token in a cookie
+                const refreshToken = this.getRefreshJWT(account);
+                cookies.set("refreshToken", refreshToken, { path: "/", httpOnly: true, secure: true, maxAge: 60 * 60 * 24 * 30 }); // 30 days expiration
+                return jwt;
+            }
+        } catch (error) {
+            console.error('Token verification failed:', error);
+        }
+        return undefined;
     }
 
 }

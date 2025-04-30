@@ -6,7 +6,8 @@ export const actions = {
         const formData = await request.formData();
         const username = formData.get("username") as string;
         const password = formData.get("password") as string;
-        const jwt = await accountManager.signIn(username, password);
+        const remember = formData.get("remember") as string;
+        const jwt = await accountManager.signIn(username, password, cookies, remember === "on");
         
         if (jwt) {
             // Set the JWT in a cookie
