@@ -95,10 +95,10 @@
                             type="checkbox"
                             id={tag.tag}
                             value={tag}
-                            class=""
+                            class="cursor-pointer"
                             bind:checked={tag.checked}
                         />
-                        <label for={tag.tag} class="text-gray-700"
+                        <label for={tag.tag} class="text-gray-700 cursor-pointer"
                             >{tag.tag}</label
                         >
                     </span>

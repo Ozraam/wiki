@@ -82,12 +82,12 @@
 
         <button
             type="submit"
-            class="bg-blue-500 text-white p-2 active:bg-gray-200"
+            class="bg-blue-700 text-white p-2 active:bg-gray-200"
             >{data.is_edit ? "Edit" : "Create"} Article</button
         >
         <button
             type="button"
-            class="bg-blue-500 text-white p-2 active:bg-gray-200"
+            class="bg-blue-700 text-white p-2 active:bg-gray-200"
             onclick={() => (isPreview = !isPreview)}>Preview</button
         >
     </form>

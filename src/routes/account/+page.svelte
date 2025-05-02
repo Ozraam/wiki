@@ -19,39 +19,39 @@
     </p>
 
     {#if data.user}
-        <p class="text-green-500 mb-4">
+        <p class="text-green-700 mb-4">
             Welcome back, {data.user.username}! You are logged in.
         </p>
 
         <div class="flex gap-4 w-full justify-center">
             <a
                 href="/account/settings"
-                class="bg-blue-500 text-white p-2 active:bg-gray-200 hover:bg-blue-600 transition duration-200"
+                class="bg-blue-600 text-white p-2 active:bg-gray-200 hover:bg-blue-600 transition duration-200"
             >
                 Account Settings
             </a>
             <a
                 href="/auth/logout"
-                class="ml-4 bg-red-500 text-white p-2 active:bg-gray-200 hover:bg-red-600 transition duration-200"
+                class="ml-4 bg-red-600 text-white p-2 active:bg-gray-200 hover:bg-red-600 transition duration-200"
             >
                 Log out
             </a>
         </div>
     {:else}
-        <p class="text-red-500 mb-4">
+        <p class="text-red-600 mb-4">
             You are not logged in. Please log in to access your account.
         </p>
 
         <div class="flex gap-4 w-full items-center justify-center">
             <a
                 href="/auth/signin"
-                class="bg-blue-500 text-white p-2 active:bg-gray-200 hover:bg-blue-600 transition duration-200"
+                class="bg-blue-600 text-white p-2 active:bg-gray-200 hover:bg-blue-700 transition duration-200"
             >
                 Sign in
             </a>
             <a
                 href="/auth/signup"
-                class="ml-4 bg-blue-500 text-white p-2 active:bg-gray-200 hover:bg-blue-600 transition duration-200"
+                class="ml-4 bg-blue-600 text-white p-2 active:bg-gray-200 hover:bg-blue-700 transition duration-200"
             >
                 Sign up
             </a>
