@@ -1,4 +1,4 @@
-<form method="POST" class="flex flex-col gap-4">
+<form method="POST" class="flex flex-col gap-4 items-center">
     <div class="flex flex-col gap-2">
         <label for="username">Username</label>
         <input
@@ -35,4 +35,8 @@
     <button type="submit" class="bg-blue-500 text-white p-2 active:bg-gray-200">
         Sign Up
     </button>
+
+    <a href="/auth/signin" class="text-blue-500 hover:underline">
+        Already have an account? Sign in here.
+    </a>
 </form>
